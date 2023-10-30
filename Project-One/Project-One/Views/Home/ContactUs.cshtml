@@ -1,0 +1,95 @@
+﻿@model Model.Contact
+
+@{
+    ViewBag.Title = "Contact Us";
+}
+
+<style>
+    /* Your custom styles */
+    .custom-img-size {
+        width: 600px;
+        height: 400px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .btn {
+        background-color: #0594B4;
+        margin-top: 50px;
+        color: #FFF;
+    }
+
+    .form-control {
+        background-color: #EFFCFF;
+        color: #7B7B7B;
+    }
+
+    .top-input {
+        margin-top: 40px;
+    }
+
+    h1 {
+        color: #0594B4;
+    }
+
+    h3 {
+        color: #7B7B7B;
+    }
+
+    input {
+        max-width: 600px;
+    }
+
+    .label-success{
+        margin-top:10px;
+    }
+</style>
+
+<div class="text-center">
+    <h1>Contact Us</h1>
+    <h3>We look forward to hearing from you!</h3>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        
+        <div class="col-md-6">
+            <img src="..\Images\contactUs.png" alt="Image" class="custom-img-size" />
+        </div>
+
+        
+        <div class="col-md-6">
+            @using (Html.BeginForm("ContactUs", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="mb-5 form-group top-input">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-5 form-group">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-5 form-group">
+                    @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telephone" } })
+                    @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-5 form-group">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-block">Submit</button>
+            }
+            <label class="label-success">@ViewBag.SuccessMessage</label>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
